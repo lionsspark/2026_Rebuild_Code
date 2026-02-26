@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.config.PIDConstants;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -19,10 +20,52 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+
+  public static final class CoralSubsystemConstants {
+    public static final int kElevatorMotorCanId = 10;
+    public static final int kLeftElevatorMotorCanID = 11;
+    public static final int kArmMotorCanId = 12;
+    public static final int kIntakeMotorCanId = 13;
+
+    public static final class ElevatorSetpoints {
+      public static final int kFeederStation = 0;
+      public static final int kLevel1 = 30;
+      public static final int kLevel2 = 10;
+      public static final int kLevel3 = 40;
+      public static final int kLevel4 = 92;
+    }
+
+    public static final class ArmSetpoints {
+      public static final double kFeederStation = -21;
+      public static final double kLevel1 = 0;
+      public static final double kLevel2 = 11;
+      public static final double kLevel3 = 11;
+      public static final double kLevel4 = 11; //tune dis mf
+      public static final double kRemoveAlgae = 22;
+    }
+
+    public static final class IntakeSetpoints {
+      public static final double kForward = -.3;
+      public static final double kReverse = .2;
+    }
   }
-  
+
+  public static final class AlgaeSubsystemConstants {
+    public static final int kIntakeMotorCanId = 15;
+    public static final int kPivotMotorCanId = 14;
+
+    public static final class ArmSetpoints {
+      public static final double kStow = 0;
+      public static final double kHold = -20;
+      public static final double kDown = -25;
+    }
+
+    public static final class IntakeSetpoints {
+      public static final double kForward = 0.8;
+      public static final double kReverse = -0.8;
+      public static final double kHold = 0.5;
+    }
+  }
 
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
@@ -48,6 +91,8 @@ public static class OperatorConstants {
     public static final double kBackLeftChassisAngularOffset = Math.PI;
     public static final double kBackRightChassisAngularOffset = Math.PI / 2;
 
+    public static final PIDConstants translationConstants = new PIDConstants(0.04, 0, 0);
+    public static final PIDConstants rotationConstants = new PIDConstants(1, 0, 0);
 
     // SPARK MAX CAN IDs
     public static final int kFrontLeftDrivingCanId = 2;
@@ -96,8 +141,8 @@ public static class OperatorConstants {
   public static final class AutoConstants {
     public static final double kMaxSpeedMetersPerSecond = .5;//3
     public static final double kMaxAccelerationMetersPerSecondSquared = .5; //3
-    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI / 10; // Math.PI
-    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI / 10; // Math.PI
+    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI / 10;
+    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI / 10;
 
     public static final double kPXController = 1;
     public static final double kPYController = 1;
