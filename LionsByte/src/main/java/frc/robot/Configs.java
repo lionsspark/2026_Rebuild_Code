@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.revrobotics.spark.FeedbackSensor;
+import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.LimitSwitchConfig.Type;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkFlexConfig;
@@ -14,7 +16,7 @@ public final class Configs {
     static {
       // Use module constants to calculate conversion factors and feed forward gain.
       double drivingFactor =
-          ModuleConstants.kWheelDiameterMeters * Math.PI / ModuleConstants.kDrivingMotorReduction;
+      ModuleConstants.kWheelDiameterMeters * Math.PI / ModuleConstants.kDrivingMotorReduction;
       double turningFactor = 2 * Math.PI;
       double drivingVelocityFeedForward = 1 / ModuleConstants.kDriveWheelFreeSpeedRps;
 
@@ -23,8 +25,10 @@ public final class Configs {
           .encoder
           .positionConversionFactor(drivingFactor) // meters
           .velocityConversionFactor(drivingFactor / 60.0); // meters per second
+          
       drivingConfig
           .closedLoop
+          .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
           // These are example gains you may need to them for your own robot!
           .pid(0.04, 0, 0)
           .velocityFF(drivingVelocityFeedForward)
@@ -40,6 +44,7 @@ public final class Configs {
           .velocityConversionFactor(turningFactor / 60.0); // radians per second
       turningConfig
           .closedLoop
+          .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
           // These are example gains you may need to them for your own robot!
           .pid(1, 0, 0)
           .outputRange(-1, 1)
@@ -68,6 +73,7 @@ public final class Configs {
        */
       armConfig
           .closedLoop
+          .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
           // Set PID values for position control
           .p(0.05)
           .outputRange(-1, 1)
@@ -94,6 +100,7 @@ public final class Configs {
        */
       leftElevatorConfig
           .closedLoop
+          .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
           // Set PID values for position control
           .p(0.1)
           .outputRange(-1, 1)
@@ -125,6 +132,7 @@ public final class Configs {
        */
       elevatorConfig
           .closedLoop
+          .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
           // Set PID values for position control
           .p(0.1)
           .outputRange(-1, 1)
@@ -154,6 +162,7 @@ public final class Configs {
        */
       armConfig
           .closedLoop
+          .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
           // Set PID values for position control. We don't need to pass a closed
           // loop slot, as it will default to slot 0.
           .p(0.1)
@@ -164,3 +173,5 @@ public final class Configs {
     }
   }
 }
+
+// Copyright (c) FIRST and othe
