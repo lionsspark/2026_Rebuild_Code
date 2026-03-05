@@ -20,6 +20,38 @@ import frc.robot.Constants.VortexMotorConstants;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+  public static final class IntakeSubsystemConstants {
+    public static final int kIntakeMotorCanId = 2;    // SPARK Flex CAN ID
+    public static final int kConveyorMotorCanId = 4;  // SPARK Flex CAN ID
+
+    public static final class IntakeSetpoints {
+      public static final double kIntake = 0.6;
+      public static final double kExtake = -0.6;
+    }
+
+    public static final class ConveyorSetpoints {
+      public static final double kIntake = 0.7;
+      public static final double kExtake = -0.7;
+    }
+  }
+
+  public static final class ShooterSubsystemConstants {
+    public static final int kFeederMotorCanId = 5;    // SPARK Flex CAN ID
+    public static final int kFlywheelMotorCanId = 6;  // SPARK Flex CAN ID (Right)
+    public static final int kFlywheelFollowerMotorCanId = 7;  // SPARK Flex CAN ID (Left)
+
+    public static final class FeederSetpoints {
+      public static final double kFeed = 0.95;
+    }
+
+    public static final class FlywheelSetpoints {
+      public static final double kShootRpm = 5000;
+      public static final double kVelocityTolerance = 100;
+    }
+  }
+
+  ///////////////////
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
@@ -96,65 +128,13 @@ public final class Constants {
 
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
+    public static final double kVortexKv = 565;   // rpm/V
   }
   ////////////////////////////////////////
   /// 
   /// 
   /// ////////////////////////
   /// 
-
-  public static final class CoralSubsystemConstants {
-    public static final int kElevatorMotorCanId = 10;
-    public static final int kLeftElevatorMotorCanID = 11;
-    public static final int kArmMotorCanId = 12;
-    public static final int kIntakeMotorCanId = 13;
-
-    public static final class ElevatorSetpoints {
-      public static final int kFeederStation = 0;
-      public static final int kLevel1 = 30;
-      public static final int kLevel2 = 10;
-      public static final int kLevel3 = 40;
-      public static final int kLevel4 = 92;
-    }
-
-    public static final class ArmSetpoints {
-      public static final double kFeederStation = -21;
-      public static final double kLevel1 = 0;
-      public static final double kLevel2 = 11;
-      public static final double kLevel3 = 11;
-      public static final double kLevel4 = 11; //tune dis mf
-      public static final double kRemoveAlgae = 22;
-    }
-
-    public static final class IntakeSetpoints {
-      public static final double kForward = -.3;
-      public static final double kReverse = .2;
-    }
-  }
-
-  public static final class AlgaeSubsystemConstants {
-    public static final int kIntakeMotorCanId = 15;
-    public static final int kPivotMotorCanId = 14;
-
-    public static final class ArmSetpoints {
-      public static final double kStow = 0;
-      public static final double kHold = -20;
-      public static final double kDown = -25;
-    }
-
-    public static final class IntakeSetpoints {
-      public static final double kForward = 0.8;
-      public static final double kReverse = -0.8;
-      public static final double kHold = 0.5;
-    }
-  }
-
-  
-
-  
-
-  
-
   public static final class LimelightAutoConstants {
     public static final double kMaxSpeedMetersPerSecond = .1;
     public static final double kMaxAngularSpeed = Math.PI / 10;
