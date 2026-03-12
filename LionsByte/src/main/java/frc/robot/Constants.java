@@ -35,7 +35,9 @@ public final class Constants {
       public static final double kExtake = -0.7;
     }
   }
-
+  public static final class PivotSubsystemConstants{
+    public static final int kPivotMotorCanId = 1;
+  }
   public static final class ShooterSubsystemConstants {
     public static final int kFeederMotorCanId = 5;    // SPARK Flex CAN ID
     public static final int kFlywheelMotorCanId = 6;  // SPARK Flex CAN ID (Right)

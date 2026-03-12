@@ -7,7 +7,6 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.Constants.ModuleConstants;
-import com.revrobotics.spark.config.AbsoluteEncoderConfig;
 
 public final class Configs {
     private static final double nominalVoltage = 12.0;
@@ -58,7 +57,8 @@ public final class Configs {
           .positionWrappingInputRange(0, turningFactor);
     }
   }
-  public static final class IntakeSubsystem {
+
+   public static final class IntakeSubsystem {
     public static final SparkFlexConfig intakeConfig = new SparkFlexConfig();
     public static final SparkFlexConfig conveyorConfig = new SparkFlexConfig();
 
@@ -78,7 +78,32 @@ public final class Configs {
         .smartCurrentLimit(40);
     }
   }
-
+  public static final class PivotSubsystem{
+    public static final SparkFlexConfig pivotConfig = new SparkFlexConfig();
+    static{
+    
+    pivotConfig
+      .inverted(false)
+      .idleMode(IdleMode.kBrake)
+      .openLoopRampRate(0.5)
+      .closedLoopRampRate(0)
+      .smartCurrentLimit(40);
+    pivotConfig.absoluteEncoder
+      .zeroOffset(0)
+      .positionConversionFactor(360.0 / 12);
+    pivotConfig.closedLoop
+      .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
+      .p(0.05)
+      .i(0)
+      .d(0.001)
+      .outputRange(-0.5, 0.5);
+      pivotConfig.softLimit
+        .forwardSoftLimit(80)
+        .forwardSoftLimitEnabled(true)
+        .reverseSoftLimit(30)
+        .reverseSoftLimitEnabled(true);
+    }
+  }
   public static final class ShooterSubsystem {
     public static final SparkFlexConfig flywheelConfig = new SparkFlexConfig();
     public static final SparkFlexConfig flywheelFollowerConfig = new SparkFlexConfig();
@@ -92,6 +117,7 @@ public final class Configs {
         .closedLoopRampRate(1.0)
         .openLoopRampRate(1.0)
         .smartCurrentLimit(80);
+        
 
       /*
        * Configure the closed loop controller. We want to make sure we set the
@@ -128,7 +154,8 @@ public final class Configs {
         .smartCurrentLimit(60);
     }
   }
-  
+
+ 
 }
 
 // Copyright (c) FIRST and othe

@@ -11,6 +11,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  private final PivotSubsystem m_pivot = new PivotSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -73,6 +75,12 @@ public class RobotContainer {
      m_driverController
       .rightTrigger(OIConstants.kTriggerButtonThreshold)
       .whileTrue(m_intake.runIntakeCommand());
+    m_driverController
+    .rightTrigger(OIConstants.kTriggerButtonThreshold)
+    .whileTrue(m_pivot.goToAngle(70));
+    m_driverController
+    .rightTrigger(OIConstants.kTriggerButtonThreshold)
+    .whileFalse(m_pivot.goToAngle(60));
 
     // Left Trigger -> Run fuel intake in reverse
     m_driverController
@@ -82,8 +90,12 @@ public class RobotContainer {
     // Y Button -> Run intake and run the shooter flywheel and feeder
     m_driverController.y().toggleOnTrue(m_shooter.runShooterCommand().alongWith(m_intake.runIntakeCommand()));
 
-  }
 
+  }
+public Command getAutonomousCommand() {
+    // An example command will be run in autonomous
+    return Autos.exampleAuto(m_robotDrive);
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
