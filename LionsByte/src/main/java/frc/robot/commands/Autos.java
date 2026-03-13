@@ -42,6 +42,13 @@ public final class Autos {
             new Pose2d(3, 0, new Rotation2d(0)),
             config);
 
+          Trajectory allensLine = 
+            TrajectoryGenerator.generateTrajectory(
+              new Pose2d(0,0, new Rotation2d(0)),
+              List.of(),
+              new Pose2d(2,0,new Rotation2d(0)),
+              config);
+
     var thetaController =
         new ProfiledPIDController(
             AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
@@ -62,6 +69,46 @@ public final class Autos {
 
     // Reset odometry to the starting pose of the trajectory.
     drive.resetOdometry(exampleTrajectory.getInitialPose());
+
+    // Run path following command, then stop at the end.
+    return swerveControllerCommand.andThen(() -> drive.drive(0, 0, 0, false));
+  }
+  public static Command allenAutoCommand(DriveSubsystem drive) {
+    // Create config for trajectory
+    TrajectoryConfig config =
+        new TrajectoryConfig(
+                AutoConstants.kMaxSpeedMetersPerSecond,
+                AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+            // Add kinematics to ensure max speed is actually obeyed
+            .setKinematics(DriveConstants.kDriveKinematics);
+
+          Trajectory allensLine = 
+            TrajectoryGenerator.generateTrajectory(
+              new Pose2d(0,0, new Rotation2d(0)),
+              List.of(),
+              new Pose2d(2,0,new Rotation2d(0)),
+              config);
+
+    var thetaController =
+        new ProfiledPIDController(
+            AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+    SwerveControllerCommand swerveControllerCommand =
+        new SwerveControllerCommand(
+            allensLine,
+            drive::getPose, // Functional interface to feed supplier
+            DriveConstants.kDriveKinematics,
+
+            // Position controllers
+            new PIDController(AutoConstants.kPXController, 0, 0),
+            new PIDController(AutoConstants.kPYController, 0, 0),
+            thetaController,
+            drive::setModuleStates,
+            drive);
+
+    // Reset odometry to the starting pose of the trajectory.
+    drive.resetOdometry(allensLine.getInitialPose());
 
     // Run path following command, then stop at the end.
     return swerveControllerCommand.andThen(() -> drive.drive(0, 0, 0, false));

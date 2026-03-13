@@ -94,7 +94,7 @@ public class RobotContainer {
   }
 public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_robotDrive);
+    return Autos.allenAutoCommand(m_robotDrive);
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
