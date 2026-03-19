@@ -1,3 +1,4 @@
+/* 
 package frc.robot.subsystems;
 
 import com.revrobotics.PersistMode;
@@ -22,18 +23,10 @@ public class IntakeSubsystem extends SubsystemBase {
   private SparkFlex conveyorMotor =
       new SparkFlex(IntakeSubsystemConstants.kConveyorMotorCanId, MotorType.kBrushless);
 
-  /** Creates a new IntakeSubsystem. */
+  // Creates a new IntakeSubsystem. 
   public IntakeSubsystem() {
-    /*
-     * Apply the appropriate configurations to the SPARKs.
-     *
-     * kResetSafeParameters is used to get the SPARK to a known state. This
-     * is useful in case the SPARK is replaced.
-     *
-     * kPersistParameters is used to ensure the configuration is not lost when
-     * the SPARK loses power. This is useful for power cycles that may occur
-     * mid-operation.
-     */
+  
+
     intakeMotor.configure(
         Configs.IntakeSubsystem.intakeConfig,
         ResetMode.kResetSafeParameters,
@@ -47,20 +40,18 @@ public class IntakeSubsystem extends SubsystemBase {
     System.out.println("---> IntakeSubsystem initialized");
   }
 
-  /** Set the intake motor power in the range of [-1, 1]. */
+  //Set the intake motor power in the range of [-1, 1]
   private void setIntakePower(double power) {
     intakeMotor.set(power);
   }
 
-  /** Set the conveyor motor power in the range of [-1, 1]. */
+  //Set the conveyor motor power in the range of [-1, 1]. 
   private void setConveyorPower(double power) {
     conveyorMotor.set(power);
   }
 
-  /**
-   * Command to run the intake and conveyor motors. When the command is interrupted, e.g. the button is released,
-   * the motors will stop.
-   */
+ 
+
   public Command runIntakeCommand() {
     return this.startEnd(
         () -> {
@@ -72,10 +63,7 @@ public class IntakeSubsystem extends SubsystemBase {
         }).withName("Intaking");
   }
 
-  /**
-   * Command to reverse the intake motor and coveyor motors. When the command is interrupted, e.g. the button is
-   * released, the motors will stop.
-   */
+ 
   public Command runExtakeCommand() {
     return this.startEnd(
         () -> {
@@ -95,3 +83,4 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
 }
+*/

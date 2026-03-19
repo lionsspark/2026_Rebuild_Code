@@ -22,8 +22,8 @@ import frc.robot.Constants.VortexMotorConstants;
 public final class Constants {
 
   public static final class IntakeSubsystemConstants {
-    public static final int kIntakeMotorCanId = 2;    // SPARK Flex CAN ID
-    public static final int kConveyorMotorCanId = 4;  // SPARK Flex CAN ID
+    public static final int kIntakeMotorCanId = 11;    // SPARK Flex CAN ID
+    public static final int kConveyorMotorCanId = 12;  // SPARK Flex CAN ID
 
     public static final class IntakeSetpoints {
       public static final double kIntake = 0.6;
@@ -36,12 +36,12 @@ public final class Constants {
     }
   }
   public static final class PivotSubsystemConstants{
-    public static final int kPivotMotorCanId = 1;
+    public static final int kPivotMotorCanId = 10;
   }
   public static final class ShooterSubsystemConstants {
-    public static final int kFeederMotorCanId = 5;    // SPARK Flex CAN ID
-    public static final int kFlywheelMotorCanId = 6;  // SPARK Flex CAN ID (Right)
-    public static final int kFlywheelFollowerMotorCanId = 7;  // SPARK Flex CAN ID (Left)
+    public static final int kFeederMotorCanId = 13;    // SPARK Flex CAN ID
+    public static final int kFlywheelMotorCanId = 14;  // SPARK Flex CAN ID (Right)
+    public static final int kFlywheelFollowerMotorCanId = 15;  // SPARK Flex CAN ID (Left)
 
     public static final class FeederSetpoints {
       public static final double kFeed = 0.95;
@@ -78,15 +78,15 @@ public final class Constants {
     public static final double kBackRightChassisAngularOffset = Math.PI / 2;
 
     // SPARK MAX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 2;
-    public static final int kRearLeftDrivingCanId = 4;
-    public static final int kFrontRightDrivingCanId = 6;
-    public static final int kRearRightDrivingCanId = 8;
+    public static final int kFrontLeftDrivingCanId = 8;
+    public static final int kRearLeftDrivingCanId = 6;
+    public static final int kFrontRightDrivingCanId = 2;
+    public static final int kRearRightDrivingCanId = 4;
 
-    public static final int kFrontLeftTurningCanId = 3;
-    public static final int kRearLeftTurningCanId = 5;
+    public static final int kFrontLeftTurningCanId = 9;
+    public static final int kRearLeftTurningCanId = 3;
     public static final int kFrontRightTurningCanId = 7;
-    public static final int kRearRightTurningCanId = 9;
+    public static final int kRearRightTurningCanId = 5;
 
     public static final boolean kGyroReversed = false;
   }
@@ -110,7 +110,7 @@ public final class Constants {
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
-    public static final double kDriveDeadband = 0.05;
+    public static final double kDriveDeadband = 0.15;
     public static final double kTriggerButtonThreshold = 0.2;
   }
 

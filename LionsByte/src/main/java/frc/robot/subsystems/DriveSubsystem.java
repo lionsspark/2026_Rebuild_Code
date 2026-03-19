@@ -83,8 +83,7 @@ public class DriveSubsystem extends SubsystemBase {
   {
     SparkFlexConfig invertConfig = new SparkFlexConfig();
     
-    m_rearRight.invertMotor();
-    m_frontRight.invertMotor();
+    
    // m_frontRight.setInverted(true);
 /* 
     try{

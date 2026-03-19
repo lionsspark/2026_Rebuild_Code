@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+/* 
 package frc.robot.subsystems;
 
 import com.revrobotics.PersistMode;
@@ -42,18 +42,9 @@ public class ShooterSubsystem extends SubsystemBase {
   // Member variables for subsystem state management
   private double flywheelTargetVelocity = 0.0;
 
-  /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-    /*
-     * Apply the appropriate configurations to the SPARKs.
-     *
-     * kResetSafeParameters is used to get the SPARK to a known state. This
-     * is useful in case the SPARK is replaced.
-     *
-     * kPersistParameters is used to ensure the configuration is not lost when
-     * the SPARK loses power. This is useful for power cycles that may occur
-     * mid-operation.
-     */
+    
+
     flywheelMotor.configure(
         Configs.ShooterSubsystem.flywheelConfig,
         ResetMode.kResetSafeParameters,
@@ -78,9 +69,7 @@ public class ShooterSubsystem extends SubsystemBase {
             velocity, FlywheelSetpoints.kVelocityTolerance);
   }
 
-  /** 
-   * Trigger: Is the flywheel spinning at the required velocity?
-   */
+ 
   public final Trigger isFlywheelSpinning = new Trigger(
       () -> isFlywheelAt(5000) || flywheelEncoder.getVelocity() > 5000
   );
@@ -89,30 +78,25 @@ public class ShooterSubsystem extends SubsystemBase {
       () -> isFlywheelAt(-5000) || flywheelEncoder.getVelocity() < -5000
   );
 
-  /** 
-   * Trigger: Is the flywheel stopped?
-   */
+  
   public final Trigger isFlywheelStopped = new Trigger(() -> isFlywheelAt(0));
 
-  /**
-   * Drive the flywheels to their set velocity. This will use MAXMotion
-   * velocity control which will allow for a smooth acceleration and deceleration to the mechanism's
-   * setpoint.
-   */
+  
+   // Drive the flywheels to their set velocity. This will use MAXMotion
+   // velocity control which will allow for a smooth acceleration and deceleration to the mechanism's
+   // setpoint.
+   
   private void setFlywheelVelocity(double velocity) {
     flywheelController.setSetpoint(velocity, ControlType.kMAXMotionVelocityControl);
     flywheelTargetVelocity = velocity;
   }
 
-  /** Set the feeder motor power in the range of [-1, 1]. */
+  // Set the feeder motor power in the range of [-1, 1]. 
   private void setFeederPower(double power) {
     feederMotor.set(power);
   }
   
-  /**
-   * Command to run the flywheel motors. When the command is interrupted, e.g. the button is released,
-   * the motors will stop.
-   */
+  
   public Command runFlywheelCommand() {
     return this.startEnd(
         () -> {
@@ -123,10 +107,6 @@ public class ShooterSubsystem extends SubsystemBase {
         }).withName("Spinning Up Flywheel");
   }
 
-  /**
-   * Command to run the feeder and flywheel motors. When the command is interrupted, e.g. the button is released,
-   * the motors will stop.
-   */
   public Command runFeederCommand() {
     return this.startEnd(
         () -> {
@@ -138,10 +118,7 @@ public class ShooterSubsystem extends SubsystemBase {
         }).withName("Feeding");
   }
 
-  /**
-   * Meta-command to operate the shooter. The Flywheel starts spinning up and when it reaches
-   * the desired speed it starts the Feeder.
-   */
+ 
   public Command runShooterCommand() {
     return this.startEnd(
       () -> this.setFlywheelVelocity(FlywheelSetpoints.kShootRpm),
@@ -175,3 +152,4 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
 }
+  */
